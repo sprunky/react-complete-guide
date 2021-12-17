@@ -1,5 +1,6 @@
 import './ExpenseForm.css'
 import React, {useState} from "react";
+
 const ExpenseForm = (props) => {
     const [title, setEnteredTitle] = useState('')
     const titleChangeHandler = (event) => {
@@ -7,32 +8,38 @@ const ExpenseForm = (props) => {
     }
 
     const [amount, setEnteredAmount] = useState('')
-    const amountChangeHandler = (event) =>{
+    const amountChangeHandler = (event) => {
         setEnteredAmount(event.target.value)
     }
 
     const [date, setEnteredDate] = useState('')
-    const dateChangeHandler = (event) =>{
+    const dateChangeHandler = (event) => {
         setEnteredDate(event.target.value)
     }
-    const submitHandler = (event) =>{
+    const submitHandler = (event) => {
         event.preventDefault();
-        const expenseData = {id: 'e'+props.size, title: title, amount: amount, date: new Date(date)}
+        const expenseData = {id: 'e' + props.size, title: title, amount: amount, date: new Date(date)}
         console.log('submitHandler')
         console.log(expenseData)
 
         props.onNewExpense(expenseData);
+        props.hideForm();
         setEnteredTitle('');
         setEnteredDate('');
         setEnteredAmount('');
     };
 
-    return(
+    const hideFormHandler = () => {
+        props.hideForm();
+    }
+
+
+    return (
         <form onSubmit={submitHandler}>
             <div className="new-expense__controls">
                 <div className="new-expense__control">
                     <label>Title</label>
-                    <input type="text" value={title}onChange={titleChangeHandler}/>
+                    <input type="text" value={title} onChange={titleChangeHandler}/>
                 </div>
                 <div className="new-expense__control">
                     <label>Amount</label>
@@ -45,7 +52,11 @@ const ExpenseForm = (props) => {
             </div>
             <div className={"new-expense__actions"}>
                 <button type={"submit"}>Add Expense</button>
+                <button onClick={hideFormHandler}>Cancel</button>
             </div>
         </form>
-)};
+
+
+    )
+};
 export default ExpenseForm;

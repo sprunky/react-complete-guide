@@ -1,4 +1,3 @@
-import ExpenseItem from "./ExpenseItem";
 import "./Expenses.css"
 import Card from "../UI/Card";
 import ExpenseFilter from "./ExpenseFilter";
@@ -15,8 +14,8 @@ function Expenses(props) {
 
     return (
         <div>
-            <ExpenseFilter onChangeYear={handleChangedYear} selected={selectedYear}/>
             <Card className={"expenses"}>
+                <ExpenseFilter onChangeYear={handleChangedYear} selected={selectedYear}/>
                 <ExpensesList dataList = {filteredList}/>
             </Card>
         </div>
